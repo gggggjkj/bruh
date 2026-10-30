@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: discord-deepseek-bot-cloud
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -u cloud_main.py
+    healthCheckPath: /healthz
+    numInstances: 1
+    envVars:
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_MODEL
+        value: deepseek-flash
+      - key: REPLY_MODE
+        value: mention
+      - key: MAX_REPLY_TOKENS
+        value: "800"
